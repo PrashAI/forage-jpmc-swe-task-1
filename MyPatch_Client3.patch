@@ -1,0 +1,42 @@
+
+
+def getDataPoint(stock):
+    # Assuming stock is a dictionary with 'bid_price' and 'ask_price'
+    bid_price = stock['bid_price']
+    ask_price = stock['ask_price']
+    
+    # Compute the average price
+    price = (bid_price + ask_price) / 2
+    
+    # Return a tuple with the stock name and the computed price
+    return (stock['name'], price)
+
+def getRatio(price_a, price_b):
+    if price_b == 0:
+        return float('inf')  # or some other indication of an invalid ratio
+    return price_a / price_b
+
+def main():
+    # Example dictionary to store stock prices
+    prices = {}
+
+    # Assuming you have a list of stocks
+    stocks = [{'name': 'StockA', 'bid_price': 100, 'ask_price': 102},
+              {'name': 'StockB', 'bid_price': 150, 'ask_price': 152}]
+
+    # Iterate through each stock
+    for stock in stocks:
+        # Get data point (stock name and price)
+        name, price = getDataPoint(stock)
+        # Store in prices dictionary
+        prices[name] = price
+
+    # Retrieve prices from dictionary
+    price_a = prices.get('StockA', 0)
+    price_b = prices.get('StockB', 0)
+
+    # Calculate the ratio
+    ratio = getRatio(price_a, price_b)
+
+    # Print the ratio
+    print(f"Ratio of StockA to StockB: {ratio}")
